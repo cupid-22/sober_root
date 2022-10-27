@@ -128,6 +128,3 @@ SOCIAL_ID_LENGTH = 50
 
 APPEND_SLASH = True
 AUTH_USER_MODEL = "users.User"
-
-# Enable WhiteNoise's GZip compression of static assets.
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
