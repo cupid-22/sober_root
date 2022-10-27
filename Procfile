@@ -1,1 +1,1 @@
- web: gunicorn soberapp.wsgi
+ web: gunicorn soberapp.soberapp.wsgi
