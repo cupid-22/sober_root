@@ -18,7 +18,7 @@ class LiteratureSubSection(models.Model):
     sub_title = models.CharField(max_length=50)
     is_sub_title_active = models.BooleanField(default=True)
     main_content = models.TextField()
-    literature_id = models.ForeignKey(Literature, related_name="literature", on_delete=models.CASCADE)
+    literature = models.ForeignKey(Literature, related_name="literature", on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'literature_sub_section'
