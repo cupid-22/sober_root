@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.contrib.auth.models import AbstractUser, BaseUserManager, PermissionsMixin
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -34,7 +35,10 @@ class UserManager(InheritanceManager, BaseUserManager):
             raise ValueError("Email is required for admin users")
         normalised_email = self.normalize_email(email)
 
-        user = self.model(email=normalised_email, social_id="admin_social_default",
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        user = self.model(email=normalised_email, social_id=f"{datetime.utcnow().strftime('%Y%m%d%H')}_default_social",
                           social_type=User.SocialLoginOption.ADMIN, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
@@ -55,6 +59,8 @@ class User(CoreModel, AbstractUser, PermissionsMixin):
     profile = models.ImageField(null=True, blank=True, upload_to="admin/")
     social_id = models.CharField(null=False, blank=False, unique=True, max_length=SOCIAL_ID_LENGTH, db_index=True)
     social_type = models.IntegerField(null=False, blank=False, choices=SocialLoginOption.choices)
+    sobriety_date = models.DateField(null=True)
+
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 

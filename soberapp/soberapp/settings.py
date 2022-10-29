@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
-import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,6 +23,7 @@ SECRET_KEY = "django-insecure-hp-qho65r7i69(@58i0ohr7%08-gwm5$@2f0)3k09cmi(9_4d7
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+LOCAL = True
 
 ALLOWED_HOSTS = []
 
@@ -82,7 +82,15 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
+if LOCAL:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'sober_main',
+        'USER': 'postgres',
+        'PASSWORD': '2839',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 

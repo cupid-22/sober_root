@@ -13,3 +13,4 @@ class User(admin.ModelAdmin):
     readonly_fields = ('last_login', 'date_joined')
     ordering = ['-id']
     list_filter = ['social_type']
+    view_on_site = False
