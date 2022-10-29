@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+
     "users",
+    "literature",
 ]
 
 MIDDLEWARE = [
@@ -136,3 +138,18 @@ SOCIAL_ID_LENGTH = 50
 
 APPEND_SLASH = True
 AUTH_USER_MODEL = "users.User"
+
+REST_FRAMEWORK = {
+
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'common.authentication.BearerAuthentication',
+        'rest_framework.authentication.SessionAuthentication'
+    ),
+
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 10
+}

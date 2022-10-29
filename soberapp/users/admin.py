@@ -9,7 +9,7 @@ admin.site.unregister(Group)
 class User(admin.ModelAdmin):
     list_display = ('id', 'social_id', 'social_type')
     search_fields = ('id', 'social_id', 'social_type')
-    fields = (('social_id', 'social_type'), 'last_login', 'date_joined')
+    fields = (('social_id', 'social_type'), ('date_joined', 'last_login'))
     readonly_fields = ('last_login', 'date_joined')
     ordering = ['-id']
     list_filter = ['social_type']
