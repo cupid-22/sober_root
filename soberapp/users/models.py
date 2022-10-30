@@ -13,15 +13,12 @@ class UserManager(InheritanceManager, BaseUserManager):
 
     def create_user(self, social_id, social_type, **extra_fields):
         """Create and save a regular User with the given email and password."""
-        if extra_fields.get('social_id') is None:
+        if social_id is None:
             raise ValueError("Social Id is required for application users")
-        extra_fields.setdefault('social_id', social_id)
-
-        if extra_fields.get('social_type') is None:
+        if social_type is None:
             raise ValueError("Social type is required for application users")
-        extra_fields.setdefault('social_type', social_type)
 
-        user = self.model(**extra_fields)
+        user = self.model(social_id=social_id, social_type=social_type, **extra_fields)
         user.set_unusable_password()
         user.save(using=self._db)
 

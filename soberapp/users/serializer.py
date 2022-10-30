@@ -10,7 +10,8 @@ class UserSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'social_id',
-            'social_type'
+            'social_type',
+            'sobriety_date',
         ]
 
 
@@ -27,13 +28,15 @@ class AppUserLoginSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
-        user_details = self.instance.filter(social_id=validated_data.social_id)
+        social_id = validated_data.get('social_id')
+        social_type = validated_data.get('social_type')
+
+        user_details = User.objects.filter(social_id=social_id, social_type=social_type)
         if user_details.exists():
             return user_details
-        return self.instance.create_user(validated_data)
+        return User.objects.create_user(social_id=social_id, social_type=social_type)
 
     def to_representation(self, instance):
-        # token = Token.objects.create(user=self)
         representation = super().to_representation(instance)
-        representation['token'] = "some_random_shit"
+        representation['token'] = str(Token.objects.get_or_create(user=instance)[0])
         return representation
