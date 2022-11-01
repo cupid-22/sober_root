@@ -1,7 +1,4 @@
 from django.db import models
-from rest_framework.exceptions import ValidationError
-
-from django.utils.translation import gettext_lazy as _
 
 from common.models import CoreModel
 
@@ -9,8 +6,8 @@ from common.models import CoreModel
 class Literature(CoreModel):
     title = models.CharField(max_length=100)
     subtitle = models.CharField(max_length=50, help_text="Example: Edition of the literatures")
-    is_subtitle_display_active = models.BooleanField(default=True)
-    is_sequence_display_active = models.BooleanField(default=True)
+    is_subtitle_active = models.BooleanField(help_text="To keep subtitle visible on app screen")
+    is_sequence_active = models.BooleanField(help_text="To keep sequence visible on app screen")
 
     class Meta:
         db_table = 'literature'

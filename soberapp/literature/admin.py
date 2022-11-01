@@ -10,11 +10,11 @@ class LiteratureSubSectionAdmin(admin.StackedInline):
 
 @admin.register(Literature)
 class LiteratureAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'subtitle', 'is_subtitle_display_active', 'is_sequence_display_active')
-    fields = ('title', 'subtitle', 'is_subtitle_display_active', 'is_sequence_display_active')
+    list_display = ('id', 'title', 'subtitle', 'is_subtitle_active', 'is_sequence_active')
+    fields = ('title', 'subtitle', 'is_subtitle_active', 'is_sequence_active')
     search_fields = ('id', 'title', 'subtitle')
     ordering = ['-id']
-    list_filter = ['is_subtitle_display_active', 'is_sequence_display_active']
+    list_filter = ['is_subtitle_active', 'is_sequence_active']
     view_on_site = False
 
     inlines = [

@@ -34,6 +34,7 @@ class LiteratureSubSectionContentSerializer(serializers.ModelSerializer):
             'subtitle',
             'start_page',
             'end_page',
+            'main_content',
         ]
 
 
@@ -46,7 +47,7 @@ class LiteratureWithSubsectionSerializer(serializers.ModelSerializer):
             'id',
             'title',
             'subtitle',
-            'is_subtitle_display_active',
-            'is_sequence_display_active',
+            'is_subtitle_active',
+            'is_sequence_active',
             'subsection',
         ]

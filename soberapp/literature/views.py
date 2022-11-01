@@ -19,15 +19,17 @@ class LiteratureViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewse
     search_fields = ['title', 'subtitle']
 
 
-class LiteratureSubSectionViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin,
-                                  MultiSerializerViewSetMixin, viewsets.GenericViewSet):
-    model = LiteratureSubSection
-    queryset = LiteratureSubSection.objects.all()
+class LiteratureSubSectionViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
+    model = Literature
+    queryset = Literature.objects.all()
     serializer_class = LiteratureWithSubsectionSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = (filters.SearchFilter,)
     search_fields = ['title', 'subtitle']
-    serializer_action_classes = {
-        "list": LiteratureWithSubsectionSerializer,
-        "retrieve": LiteratureSubSectionContentSerializer
-    }
+
+
+class LiteratureSubSectionDetailViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+    model = LiteratureSubSection
+    queryset = LiteratureSubSection.objects.all()
+    serializer_class = LiteratureSubSectionContentSerializer
+    permission_classes = [IsAuthenticated]
