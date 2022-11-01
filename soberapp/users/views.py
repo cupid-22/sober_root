@@ -3,13 +3,13 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from users.models import User
-from users.serializer import UserSerializer, AppUserLoginSerializer
+from users.serializer import UserSobrietySerializer, AppUserLoginSerializer
 
 
 class SobrietyDateViewSet(mixins.UpdateModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     model = User
     queryset = User.objects.exclude(social_type=User.SocialLoginOption.ADMIN)
-    serializer_class = UserSerializer
+    serializer_class = UserSobrietySerializer
     permission_classes = [IsAuthenticated]
 
 

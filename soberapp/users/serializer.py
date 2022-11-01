@@ -4,13 +4,11 @@ from rest_framework.authtoken.models import Token
 from users.models import User
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserSobrietySerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [
             'id',
-            'social_id',
-            'social_type',
             'sobriety_date',
         ]
 

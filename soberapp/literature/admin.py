@@ -4,17 +4,17 @@ from .models import Literature, LiteratureSubSection
 
 class LiteratureSubSectionAdmin(admin.StackedInline):
     model = LiteratureSubSection
-    fields = ('title', ('is_sub_title_active', 'sub_title'), 'main_content')
-    extra = 6
+    fields = ('title', ('start_page', 'end_page'), 'subtitle', 'main_content')
+    extra = 3
 
 
 @admin.register(Literature)
 class LiteratureAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'sub_title')
-    search_fields = ('id', 'title', 'sub_title')
-    fields = ('title', 'sub_title')
+    list_display = ('id', 'title', 'subtitle', 'is_subtitle_display_active', 'is_sequence_display_active')
+    fields = ('title', 'subtitle', 'is_subtitle_display_active', 'is_sequence_display_active')
+    search_fields = ('id', 'title', 'subtitle')
     ordering = ['-id']
-    list_filter = ['title']
+    list_filter = ['is_subtitle_display_active', 'is_sequence_display_active']
     view_on_site = False
 
     inlines = [
@@ -24,8 +24,8 @@ class LiteratureAdmin(admin.ModelAdmin):
 
 @admin.register(LiteratureSubSection)
 class LiteratureSubSectionAdmin(admin.ModelAdmin):
-    list_display = ('id', 'literature_id', 'title', 'sub_title', 'main_content')
-    search_fields = ('id', 'title', 'sub_title', 'main_content')
-    fields = ('title', ('is_sub_title_active', 'sub_title'), 'main_content', 'literature_id',)
+    list_display = ('id', 'literature_id', 'title', 'subtitle', 'main_content')
+    search_fields = ('id', 'title', 'subtitle', 'main_content')
+    fields = ('title', 'subtitle', 'main_content', 'literature_id',)
     ordering = ['-id']
     view_on_site = False
