@@ -1,16 +1,18 @@
 from rest_framework import viewsets, mixins, filters
 from rest_framework.permissions import IsAuthenticated
+from rest_framework_extensions.mixins import NestedViewSetMixin
 
 from common.utils import MultiSerializerViewSetMixin
 from literature.models import Literature, LiteratureSubSection
 from literature.serializer import (
     LiteratureSerializer,
-    LiteratureWithSubsectionSerializer,
-    LiteratureSubSectionContentSerializer
+    LiteratureSubSectionSerializer,
+    LiteratureSubSectionDetailSerializer,
 )
 
 
-class LiteratureViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
+class LiteratureViewSet(NestedViewSetMixin, mixins.RetrieveModelMixin,
+                        mixins.ListModelMixin, viewsets.GenericViewSet):
     model = Literature
     queryset = Literature.objects.all()
     serializer_class = LiteratureSerializer
@@ -19,17 +21,13 @@ class LiteratureViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewse
     search_fields = ['title', 'subtitle']
 
 
-class LiteratureSubSectionViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
-    model = Literature
-    queryset = Literature.objects.all()
-    serializer_class = LiteratureWithSubsectionSerializer
-    permission_classes = [IsAuthenticated]
-    filter_backends = (filters.SearchFilter,)
-    search_fields = ['title', 'subtitle']
-
-
-class LiteratureSubSectionDetailViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class LiteratureSubSectionDetailViewSet(NestedViewSetMixin, MultiSerializerViewSetMixin,
+                                        mixins.RetrieveModelMixin, mixins.ListModelMixin,
+                                        viewsets.GenericViewSet):
     model = LiteratureSubSection
+    serializer_action_classes = {
+        'list': LiteratureSubSectionSerializer,
+        'retrieve': LiteratureSubSectionDetailSerializer,
+    }
     queryset = LiteratureSubSection.objects.all()
-    serializer_class = LiteratureSubSectionContentSerializer
     permission_classes = [IsAuthenticated]
