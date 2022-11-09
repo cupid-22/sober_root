@@ -21,8 +21,8 @@ from django.conf import settings
 from soberapp import api_urls
 
 urlpatterns = [
-    re_path("(admin/)?", admin.site.urls),
     re_path("api/", include(api_urls)),
+    re_path("(admin/)?", admin.site.urls),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
