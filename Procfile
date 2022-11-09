@@ -1,1 +1,1 @@
-web: gunicorn soberapp.wsgi --chdir /soberapp
+web: gunicorn soberapp.wsgi --chdir soberapp
