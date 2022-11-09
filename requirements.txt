@@ -6,3 +6,4 @@ gunicorn
 dj-config-url~=0.1.1
 django-filter
 drf-extensions
+drf-flex-fields
