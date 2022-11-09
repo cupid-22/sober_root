@@ -23,7 +23,7 @@ SECRET_KEY = "django-insecure-hp-qho65r7i69(@58i0ohr7%08-gwm5$@2f0)3k09cmi(9_4d7
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-LOCAL = False
+LOCAL = DEBUG
 
 ALLOWED_HOSTS = ['soberapp.herokuapp.com']
 
@@ -51,6 +51,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "soberapp.urls"
