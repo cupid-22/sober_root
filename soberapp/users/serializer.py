@@ -36,5 +36,5 @@ class AppUserLoginSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        representation['token'] = str(Token.objects.get_or_create(user=instance)[0])
+        representation['token'] = str(Token.objects.create(user=instance)[0])
         return representation

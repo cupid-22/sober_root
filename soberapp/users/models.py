@@ -44,18 +44,18 @@ class UserManager(InheritanceManager, BaseUserManager):
 
 
 class User(CoreModel, AbstractUser, PermissionsMixin):
-    class SocialLoginOption(models.IntegerChoices):
-        FACEBOOK = 1, _('Facebook Login')
-        GOOGLE = 2, _('Google Login')
-        APPLE = 3, _('Apple Login')
-        ADMIN = 4, _('Admin Login')
+    class SocialLoginOption(models.TextChoices):
+        FACEBOOK = 'fb', _('Facebook Login')
+        GOOGLE = 'google', _('Google Login')
+        APPLE = 'apple', _('Apple Login')
+        ADMIN = 'admin', _('Admin Login')
 
     username = None
     email = models.EmailField(unique=True, null=True, blank=False)
 
     profile = models.ImageField(null=True, blank=True, upload_to="admin/")
     social_id = models.CharField(null=False, blank=False, unique=True, max_length=SOCIAL_ID_LENGTH, db_index=True)
-    social_type = models.IntegerField(null=False, blank=False, choices=SocialLoginOption.choices)
+    social_type = models.CharField(null=False, blank=False, choices=SocialLoginOption.choices, max_length=6)
     sobriety_date = models.DateField(null=True)
 
     USERNAME_FIELD = "email"
