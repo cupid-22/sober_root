@@ -24,8 +24,8 @@ class LiteratureAdmin(admin.ModelAdmin):
 
 @admin.register(LiteratureSubSection)
 class LiteratureSubSectionAdmin(admin.ModelAdmin):
-    list_display = ('id', 'literature_id', 'title', 'subtitle', 'main_content')
+    list_display = ('id', 'literature', 'title', 'subtitle', 'main_content')
     search_fields = ('id', 'title', 'subtitle', 'main_content')
-    fields = ('title', 'subtitle', 'main_content', 'literature_id',)
+    fields = ('title', 'subtitle', 'main_content', 'literature',)
     ordering = ['-id']
     view_on_site = False
