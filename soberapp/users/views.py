@@ -19,8 +19,8 @@ class UserLoginViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = User.objects.exclude(social_type=User.SocialLoginOption.ADMIN)
     serializer_class = AppUserLoginSerializer
     permission_classes = []
+    authentication_classes = []
 
-    @csrf_exempt
     def create(self, request, *args, **kwargs):
         request_data = request.data
         social_type = request_data.get('social_type')
