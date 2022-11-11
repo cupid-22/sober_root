@@ -1,3 +1,4 @@
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import mixins, viewsets, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -19,6 +20,7 @@ class UserLoginViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     serializer_class = AppUserLoginSerializer
     permission_classes = []
 
+    @csrf_exempt
     def create(self, request, *args, **kwargs):
         request_data = request.data
         social_type = request_data.get('social_type')
