@@ -14,3 +14,7 @@ class User(admin.ModelAdmin):
     ordering = ['-id']
     list_filter = ['social_type']
     view_on_site = False
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.filter(is_superuser=False)
