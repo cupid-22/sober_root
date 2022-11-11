@@ -24,7 +24,7 @@ SECRET_KEY = "django-insecure-hp-qho65r7i69(@58i0ohr7%08-gwm5$@2f0)3k09cmi(9_4d7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['soberapp.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -84,6 +84,13 @@ DATABASES = {
         'HOST': 'ec2-44-209-57-4.compute-1.amazonaws.com',
         'PORT': '5432',
     }
+}
+
+local = {
+    'NAME': 'sober_main',
+    'USER': 'postgres',
+    'PASSWORD': '2839',
+    'HOST': 'localhost',
 }
 
 # Password validation
