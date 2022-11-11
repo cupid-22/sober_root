@@ -27,5 +27,6 @@ class LiteratureSubSectionAdmin(admin.ModelAdmin):
     list_display = ('id', 'literature', 'title', 'subtitle', 'main_content')
     search_fields = ('id', 'title', 'subtitle', 'main_content')
     fields = ('title', 'subtitle', 'main_content', 'literature',)
+    list_filter = ['literature']
     ordering = ['-id']
     view_on_site = False
