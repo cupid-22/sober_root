@@ -2,6 +2,12 @@ from django.db import models
 
 from common.models import CoreModel
 
+#  TODO:
+#   1. pageNumbers remove
+#   2. Subtitle optional subsection
+#   3. IsSubtitleActive basis par subtitle handle in Admin
+#   4. Email validation on user via admin panel
+
 
 class Literature(CoreModel):
     title = models.CharField(max_length=100)
@@ -18,11 +24,9 @@ class Literature(CoreModel):
 
 class LiteratureSubSection(models.Model):
     title = models.CharField(max_length=100)
-    subtitle = models.CharField(max_length=50)
+    subtitle = models.CharField(max_length=50, blank=True)
     main_content = models.TextField()
     literature = models.ForeignKey(Literature, related_name="literature", on_delete=models.CASCADE)
-    start_page = models.PositiveIntegerField()
-    end_page = models.PositiveIntegerField()
 
     class Meta:
         db_table = 'literature_sub_section'

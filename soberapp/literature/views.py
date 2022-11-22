@@ -31,3 +31,5 @@ class LiteratureSubSectionDetailViewSet(NestedViewSetMixin, MultiSerializerViewS
     }
     queryset = LiteratureSubSection.objects.all()
     permission_classes = [IsAuthenticated]
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ['title', 'subtitle']
