@@ -4,7 +4,7 @@ from .models import Literature, LiteratureSubSection
 
 class LiteratureSubSectionAdmin(admin.StackedInline):
     model = LiteratureSubSection
-    fields = ('title', ('start_page', 'end_page'), 'subtitle', 'main_content')
+    fields = ('title', 'subtitle', 'main_content')
     extra = 3
 
 
