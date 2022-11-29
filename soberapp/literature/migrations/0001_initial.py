@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
                 (
                     "is_subtitle_active",
                     models.BooleanField(
-                        help_text="To keep subtitle visible on app screen"
+                        help_text="To keep subtitle visible on literature subsection page app screen"
                     ),
                 ),
                 (

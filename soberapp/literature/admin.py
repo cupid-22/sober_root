@@ -1,11 +1,22 @@
 from django.contrib import admin
+from django import forms
+from rest_framework.exceptions import ValidationError
+
 from .models import Literature, LiteratureSubSection
+
+
+class LiteratureSubsectionAdminForm(forms.ModelForm):
+    def clean_subtitle(self):
+        if self.data.get('is_subtitle_active') == "on" and self.cleaned_data["subtitle"] == "":
+            return self.add_error("subtitle", "If subtitle flag is active, value must be in it.")
+        return self.cleaned_data["subtitle"]
 
 
 class LiteratureSubSectionAdmin(admin.StackedInline):
     model = LiteratureSubSection
     fields = ('title', 'subtitle', 'main_content')
     extra = 3
+    form = LiteratureSubsectionAdminForm
 
 
 @admin.register(Literature)

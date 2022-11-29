@@ -1,10 +1,11 @@
 from django.db import models
+from rest_framework.exceptions import ValidationError
 
 from common.models import CoreModel
 
 #  TODO:
-#   1. pageNumbers remove
-#   2. Subtitle optional subsection
+#   1. pageNumbers remove --> Done
+#   2. Subtitle optional subsection --> Done
 #   3. IsSubtitleActive basis par subtitle handle in Admin
 #   4. Email validation on user via admin panel
 
