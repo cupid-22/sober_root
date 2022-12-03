@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django import forms
-from rest_framework.exceptions import ValidationError
 
 from .models import Literature, LiteratureSubSection
 
@@ -41,3 +40,4 @@ class LiteratureSubSectionAdmin(admin.ModelAdmin):
     list_filter = ['literature']
     ordering = ['-id']
     view_on_site = False
+    form = LiteratureSubsectionAdminForm
