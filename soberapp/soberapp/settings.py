@@ -11,6 +11,16 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
+import boto3
+
+SSM = boto3.client(
+    'ssm', region_name="us-east-2",
+    aws_access_key_id=os.getenv('aws_access_key_id'),
+    aws_secret_access_key=os.getenv('aws_secret_access_key')
+)
+
+ENV_VARS = SSM.get_parameters_by_path(Path='/', WithDecryption=True, Recursive=True)
+envs = {_env_var['Name']: _env_var['Value'] for _env_var in ENV_VARS.get('Parameters', [])}
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -78,19 +88,12 @@ WSGI_APPLICATION = "soberapp.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd8fpoohrjsa9ru',
-        'USER': 'tsxtreyhzmgdth',
-        'PASSWORD': 'f671ea93c082f7c25cc1421d9b39dad42ea308e11f5d0611fe82642b99a16bd2',
-        'HOST': 'ec2-44-209-57-4.compute-1.amazonaws.com',
+        'NAME': envs['DB_NAME'],
+        'USER': envs['DB_USER'],
+        'PASSWORD': envs['DB_PW'],
+        'HOST': envs['DB_HOST'],
         'PORT': '5432',
     }
-}
-
-local = {
-    'NAME': 'sober_main',
-    'USER': 'postgres',
-    'PASSWORD': '2839',
-    'HOST': 'localhost',
 }
 
 # Password validation
